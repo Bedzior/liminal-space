@@ -1,10 +1,12 @@
 #include "Intellisense.h"
 
+#include <gba_input.h>
+#include <gba_base.h>
 
 int main()
 {
 	//set GBA rendering context to MODE 3 Bitmap Rendering
-	*(unsigned int*)0x04000000 = 0x0403;
+	*(unsigned int*)REG_BASE = 0x0403;
 
 	int t = 0;
 	while(1){

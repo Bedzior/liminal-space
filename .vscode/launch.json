@@ -5,19 +5,24 @@
     "version": "2.0.0",
     "configurations": [
         {
-            "name": "(gdb) Launch",
+            "name": "Attach to mGBA",
             "type": "cppdbg",
             "request": "launch",
-            "preLaunchTask": "gdb-debug",
             "postDebugTask": "stop emulation",
-            "serverLaunchTimeout": 10000,
-            "stopAtEntry": true,
-            "program": "${workspaceFolder}/LiminalSpace.elf",
+            "serverLaunchTimeout": 5000,
+            "program": "${workspaceFolder:liminal-space}/build/Debug/LiminalSpace.elf",
             "MIMode": "gdb",
-            "externalConsole": true,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder:liminal-space}",
             "targetArchitecture": "arm",
-            "miDebuggerServerAddress": "localhost:2345"
+            "miDebuggerPath": "${env:DEVKITARM}/bin/arm-none-eabi-gdb",
+            "miDebuggerServerAddress": "localhost:2345",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty printing for gdb",
+                    "ignoreFailures": true,
+                    "text": "-enable-pretty-printing"
+                }
+            ]
         }
     ]
 }
