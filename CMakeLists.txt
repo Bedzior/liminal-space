@@ -10,29 +10,26 @@ set(DEVKITARM_PATH $ENV{DEVKITARM})
 include(cmake/Tools.cmake)
 
 project(liminal-space)
-    message(STATUS "Hello, world!")
-
-    add_executable(LiminalSpace.elf
+    add_executable(LiminalSpace
         src/main.cpp
         include/Intellisense.h
     )
 
-    target_include_directories(LiminalSpace.elf
+    target_include_directories(LiminalSpace
         PRIVATE
             include
     )
 
     create_gba_targets()
-    target_link_libraries(LiminalSpace.elf
+    target_link_libraries(LiminalSpace
         PRIVATE
             GBA::CORE
     )
 
-    set_target_properties(LiminalSpace.elf PROPERTIES
+    set_target_properties(LiminalSpace PROPERTIES
         CXX_STANDARD 17
         CXX_STANDARD_REQUIRED YES
         CXX_EXTENSIONS NO
     )
 
-    add_executable(LiminalSpace ALIAS LiminalSpace.elf)
     add_gba_rom_target(LiminalSpace)

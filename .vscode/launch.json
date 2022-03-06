@@ -10,7 +10,7 @@
             "request": "launch",
             "postDebugTask": "stop emulation",
             "serverLaunchTimeout": 5000,
-            "program": "${workspaceFolder:liminal-space}/build/Debug/LiminalSpace.elf",
+            "program": "${workspaceFolder:liminal-space}/build/Debug/LiminalSpace",
             "MIMode": "gdb",
             "cwd": "${workspaceFolder:liminal-space}",
             "targetArchitecture": "arm",
