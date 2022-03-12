@@ -5,11 +5,12 @@
     "version": "2.0.0",
     "configurations": [
         {
-            "name": "Attach to mGBA",
+            "name": "Debug in mGBA",
             "type": "cppdbg",
             "request": "launch",
+            // "preLaunchTask": "run debug",
             "postDebugTask": "stop emulation",
-            "serverLaunchTimeout": 5000,
+            // "stopAtEntry": true,
             "program": "${workspaceFolder:liminal-space}/build/Debug/LiminalSpace",
             "MIMode": "gdb",
             "cwd": "${workspaceFolder:liminal-space}",

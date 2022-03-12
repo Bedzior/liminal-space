@@ -1,0 +1,102 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "configure debug",
+            "type": "process",
+            "command": "cmake",
+            "args": [
+                "-B build/Debug",
+                "-S ${workspaceFolder:liminal-space}",
+                "-DCMAKE_BUILD_TYPE=Debug",
+                "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder:liminal-space}/cmake/GBAToolchain.cmake"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "configure release",
+            "type": "process",
+            "command": "cmake",
+            "args": [
+                "-B build/Release",
+                "-S ${workspaceFolder:liminal-space}",
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder:liminal-space}/cmake/GBAToolchain.cmake"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "stop emulation",
+            "type": "shell",
+            "command": "pkill -15 mgba",
+            "problemMatcher": []
+        },
+        {
+            "label": "build debug",
+            "type": "process",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "build/Debug"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build release",
+            "type": "process",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "build/Release"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "dependsOn": "stop emulation",
+            "label": "clean",
+            "type": "shell",
+            "command": "cmake clean"
+        },
+        {
+            "label": "run debug",
+            "type": "process",
+            "isBackground": true,
+            "command": "mgba",
+            "args": [
+                "-2",
+                "--gdb",
+                "${workspaceFolder:liminal-space}/build/Debug/LiminalSpace.gba"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "build&run debug",
+            "dependsOn": [
+                "build debug",
+                "run debug"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": [],
+            "isBackground": true,
+            "runOptions": {
+                "instanceLimit": 1
+            }
+        },
+        {
+            "label": "run release",
+            "type": "shell",
+            "isBackground": true,
+            "command": "mgba",
+            "args": [
+                "${workspaceFolder:liminal-space}/build/Release/LiminalSpace.gba"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}

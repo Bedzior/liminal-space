@@ -1,0 +1,6 @@
+{
+    "cmake.configureArgs": [
+        "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder:liminal-space}/cmake/GBAToolchain.cmake"
+    ],
+    "cmake.buildDirectory": "${workspaceFolder:liminal-space}/build/${buildType}"
+}

@@ -1,0 +1,5 @@
+{
+    "key": "ctrl+f10",
+    "command": "workbench.action.tasks.runTask",
+    "args": "build&run debug"
+}
