@@ -1,0 +1,7 @@
+BasedOnStyle: Google
+
+# Include blocks
+IncludeBlocks: Preserve
+
+# Whitespace
+IndentWidth: 4
