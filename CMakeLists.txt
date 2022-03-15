@@ -12,6 +12,8 @@ include(cmake/Tools.cmake)
 project(liminal-space)
     add_executable(LiminalSpace
         src/main.cpp
+        src/Palette.hpp
+        src/Keypad.hpp
         include/Intellisense.h
     )
 

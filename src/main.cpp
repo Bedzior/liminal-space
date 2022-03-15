@@ -1,22 +1,41 @@
 #include "Intellisense.h"
 
+#include "Palette.hpp"
+
 #include <gba_base.h>
 #include <gba_input.h>
 #include <gba_video.h>
 
-int main()
-{
-	SetMode(BG2_ON | MODE_3);
+void fill(u16 c) {
+    for (unsigned row = 0; row < SCREEN_HEIGHT; ++row) {
+        for (unsigned col = 0; col < SCREEN_WIDTH; ++col) {
+            MODE3_FB[row][col] = c;
+        }
+    }
+}
+namespace colors {}  // namespace colors
 
-	int t = 0;
-	while(1){
-		for(int x = 0; x < SCREEN_WIDTH; ++x){
-			for(int y = 0; y < SCREEN_HEIGHT; ++y){
-				MODE3_FB[y][x] = ((((x&y)+t) & 0x1F) << 10)|
-				((((x&y)+t*3)&0x1F)<<5) | ((((x&y)+t * 5)&0x1F)<<0);
-			}
-		}
-		++t;
-	}
-	return 0;
+int main() {
+    using namespace gba;
+    SetMode(BG2_ON | MODE_3);
+
+    int t = 0;
+    u16 keys_pressed, keys_held;
+    while (1) {
+        scanKeys();
+        keys_pressed = keysDown();
+        keys_held = keysHeld();
+
+        if (((keys_pressed | keys_held) & (KEY_A | KEY_B)) == (KEY_A | KEY_B)) {
+            fill(Color::RED);
+        } else if ((keys_pressed | keys_held) & KEY_A) {
+            fill(Color::GREEN);
+        } else if ((keys_pressed | keys_held) & KEY_B) {
+            fill(Color::BLUE);
+        } else {
+            fill(Color::WHITE);
+        }
+        ++t;
+    }
+    return 0;
 }
