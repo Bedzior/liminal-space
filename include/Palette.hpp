@@ -28,7 +28,7 @@ inline constexpr Color Color::GREEN = RGB8(0x00, 0xFF, 0x00);
 inline constexpr Color Color::BLUE = RGB8(0x00, 0x00, 0xFF);
 inline constexpr Color Color::WHITE = RGB8(0xFF, 0xFF, 0xFF);
 
-template <u32 N>
+template <u8 N>
 class Palette {
    public:
     explicit Palette(Color const (&colors)[N]) {

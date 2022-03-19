@@ -6,15 +6,16 @@ endif()
 
 set(DEVKITPRO_PATH $ENV{DEVKITPRO})
 set(DEVKITARM_PATH $ENV{DEVKITARM})
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_LIST_DIR}/cmake/GBAToolchain.cmake)
 
 include(cmake/Tools.cmake)
 
 project(liminal-space)
     add_executable(LiminalSpace
         src/main.cpp
-        src/Palette.hpp
-        src/Keypad.hpp
         include/Intellisense.h
+        include/Keypad.hpp
+        include/Palette.hpp
     )
 
     target_include_directories(LiminalSpace

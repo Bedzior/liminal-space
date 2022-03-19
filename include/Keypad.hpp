@@ -9,13 +9,16 @@ class Keypad final {
     using Key = u16;
 
    public:
-    explicit Keypad() {
+    explicit Keypad() noexcept { rescan(); };
+
+    bool pressed_or_held(Keys keys) const noexcept {
+        return (keys & (m_pressed | m_held)) == keys;
+    }
+
+    void rescan() noexcept {
         scanKeys();
         m_pressed = keysDown();
         m_held = keysHeld();
-    };
-    bool pressed_or_held(Keys keys) const {
-        return (keys & (m_pressed | m_held)) == keys;
     }
 
    private:
